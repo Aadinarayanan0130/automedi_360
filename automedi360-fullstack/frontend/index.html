@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automedi 360</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="bg-atmosphere"></div>
+<div class="bg-grid"></div>
+
+<div class="app">
+
+  <div class="statusbar">
+    <div class="statusbar-inner">
+      <div class="status-badges">
+        <span class="badge"><span class="dot dot-live"></span>API Gateway: Connected (<span id="apiLatency">24</span>ms)</span>
+        <span class="badge">ABDM M3 · Ayushman Bharat Integrated</span>
+        <span class="badge">FHIR R4 Microservice</span>
+        <span class="badge badge-audit">◆ HITL Audit Mode: Active</span>
+      </div>
+      <div class="status-clock" id="liveClock"></div>
+    </div>
+  </div>
+
+  <header class="topnav">
+    <button class="brand" data-nav="home" aria-label="Automedi 360 home">
+      <span class="brand-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18" stroke="#04222a" stroke-width="3" stroke-linecap="round"/></svg>
+      </span>
+      <span class="brand-text">Automedi<span class="brand-360">360</span></span>
+    </button>
+    <nav class="navlinks">
+      <button class="navlink active" data-nav="home">Home</button>
+      <button class="navlink" data-nav="workspace">Clinical Workspace</button>
+      <button class="navlink" data-nav="register">Patient Registration</button>
+      <button class="navlink" data-nav="analytics">Analytics</button>
+    </nav>
+    <button class="nav-cta" data-nav="workspace">Launch Workspace →</button>
+  </header>
+
+  <main>
+
+    <!-- ===================== HOME ===================== -->
+    <section class="page" id="page-home">
+      <div class="hero">
+        <div>
+          <span class="eyebrow">Autonomous Hospital Revenue &amp; Patient OS</span>
+          <h1>Every clinical note is a <em>billing code</em> and a <em>patient story</em> waiting to be found.</h1>
+          <p class="lead">Automedi 360 reads the doctor's own words the moment they're written, surfaces every ICD-10 / CPT code a coder could otherwise miss, and turns the same note into a plain-English care plan the patient actually understands.</p>
+          <div class="hero-ctas">
+            <button class="btn btn-primary" data-nav="workspace">▶ Open Clinical Workspace</button>
+            <button class="btn btn-ghost" data-nav="register">+ Register a Patient</button>
+          </div>
+        </div>
+        <div class="hero-demo">
+          <div class="glass demo-card">
+            <div class="demo-card-title">✎ Doctor is typing —  live note</div>
+            <div class="demo-note" id="heroTypewriter"></div>
+            <div class="demo-divider"></div>
+            <div class="demo-card-title">⚡ Automedi 360 detects</div>
+            <div class="demo-chips" id="heroChips"></div>
+            <div class="demo-revenue">
+              <span class="demo-revenue-label">Uncaptured revenue identified</span>
+              <span class="demo-revenue-val" id="heroRevenue">₹0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-strip">
+        <div class="glass stat-tile">
+          <div class="stat-label">Patients in Roster</div>
+          <div class="stat-val" id="statPatients">0</div>
+          <div class="stat-sub">Live across all wards</div>
+        </div>
+        <div class="glass stat-tile">
+          <div class="stat-label">Revenue Identified</div>
+          <div class="stat-val" id="statRevenue">₹0</div>
+          <div class="stat-sub">Server-side cumulative</div>
+        </div>
+        <div class="glass stat-tile">
+          <div class="stat-label">Codes Auto-Suggested</div>
+          <div class="stat-val" id="statCodes">0</div>
+          <div class="stat-sub">ICD-10 / CPT / HCPCS</div>
+        </div>
+        <div class="glass stat-tile">
+          <div class="stat-label">Avg. AI Confidence</div>
+          <div class="stat-val" id="statConfidence">—</div>
+          <div class="stat-sub">HITL verified</div>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h2>How the dual engine works</h2>
+        <p>One clinical note, parsed once — powering hospital billing and patient clarity at the same time.</p>
+      </div>
+      <div class="steps-row">
+        <div class="glass step-card">
+          <div class="step-icon">📝</div>
+          <div class="step-num">STEP 01</div>
+          <h3>Doctor documents</h3>
+          <p>The attending physician writes the clinical note exactly as they normally would — no extra clicks, no structured fields to fight with.</p>
+        </div>
+        <div class="glass step-card">
+          <div class="step-icon">⚙️</div>
+          <div class="step-num">STEP 02</div>
+          <h3>Dual engine parses</h3>
+          <p>The backend extracts billable entities, drafts a clinical summary, and checks NABH / TPA documentation rules in one authoritative pass.</p>
+        </div>
+        <div class="glass step-card">
+          <div class="step-icon">✅</div>
+          <div class="step-num">STEP 03</div>
+          <h3>HITL approves &amp; patient understands</h3>
+          <p>A human coder approves each code before it's billed, while the patient gets a plain-English care plan and a transparent copay estimate.</p>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h2>Navigate Automedi 360</h2>
+        <p>Everything the front desk, the coding team and the care team need, in one system.</p>
+      </div>
+      <div class="feature-grid">
+        <button class="glass feature-card" data-nav="workspace">
+          <div class="feature-icon" style="background:var(--accent-dim);">🩺</div>
+          <h3>Clinical Workspace</h3>
+          <p>Live note editor, entity linker and the dual-engine billing + patient views.</p>
+          <span class="go">Open workspace →</span>
+        </button>
+        <button class="glass feature-card" data-nav="register">
+          <div class="feature-icon" style="background:var(--accent-2-dim);">➕</div>
+          <h3>Patient Registration</h3>
+          <p>Admit a new IPD, OPD or ER patient — they appear in the roster immediately.</p>
+          <span class="go">Register a patient →</span>
+        </button>
+        <button class="glass feature-card" data-nav="analytics">
+          <div class="feature-icon" style="background:var(--gold-dim);">📊</div>
+          <h3>Analytics &amp; Audit</h3>
+          <p>Revenue captured by department and a full HITL approval audit trail.</p>
+          <span class="go">View analytics →</span>
+        </button>
+        <button class="glass feature-card" data-nav="workspace">
+          <div class="feature-icon" style="background:var(--critical-dim);">🛡️</div>
+          <h3>Compliance Engine</h3>
+          <p>Real-time NABH / TPA pre-auth checks so claims aren't rejected downstream.</p>
+          <span class="go">See it in action →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ===================== WORKSPACE ===================== -->
+    <section class="page" id="page-workspace" hidden>
+      <div class="page-head">
+        <div>
+          <h1>Clinical Workspace</h1>
+          <p>One note. Parsed once, on the server. Billing codes for the hospital, plain language for the patient.</p>
+        </div>
+      </div>
+
+      <div class="workspace-grid">
+        <!-- LEFT -->
+        <div>
+          <div class="glass panel">
+            <div class="panel-title">Patient Roster</div>
+            <select id="patientSelect"></select>
+
+            <div class="patient-card-grid">
+              <div class="id-field"><div class="id-label">UHID</div><div class="id-val mono" id="pUhid">—</div></div>
+              <div class="id-field"><div class="id-label">Age / Gender</div><div class="id-val" id="pAgeGender">—</div></div>
+              <div class="id-field"><div class="id-label">Blood Group</div><div class="id-val" id="pBlood">—</div></div>
+              <div class="id-field"><div class="id-label">Attending Consultant</div><div class="id-val" id="pConsultant">—</div></div>
+              <div class="id-field"><div class="id-label">Location</div><div class="id-val" id="pLocation">—</div></div>
+              <div class="id-field"><div class="id-label">Department</div><div class="id-val" id="pDept">—</div></div>
+            </div>
+            <div class="tpa-pill" id="pTpa">—</div>
+          </div>
+
+          <div class="glass panel">
+            <div class="panel-title">
+              <span>Interactive Clinical Note Editor</span>
+            </div>
+            <div class="toggle-row" style="margin-bottom:12px;">
+              <label class="switch"><input type="checkbox" id="linkerToggle" checked><span class="slider"></span></label>
+              <span>✨ Live Entity Linker (Hover to Trace)</span>
+            </div>
+            <div class="note-field">
+              <div class="note-backdrop" id="noteBackdrop" aria-hidden="true"></div>
+              <textarea class="note-textarea" id="noteInput" spellcheck="false" placeholder="Type the clinical note here…"></textarea>
+            </div>
+            <div class="note-meta">
+              <span id="noteCharCount">0 characters</span>
+              <span class="note-dirty" id="noteDirtyFlag" hidden>● note edited — re-run engine</span>
+            </div>
+
+            <button class="run-btn" id="runEngineBtn">
+              <span class="spinner"></span>
+              <span class="run-label">▶ Run Automedi 360 Dual Engine</span>
+            </button>
+            <div class="run-status" id="runStatus">Not yet run for this patient.</div>
+          </div>
+
+          <div class="glass summary-card" id="summaryCard" hidden>
+            <div class="summary-tag">AI Clinical Summary · derived from the same parse as the codes below</div>
+            <p class="summary-text" id="summaryText"></p>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div>
+          <div class="tabswitch">
+            <button class="tabbtn active" data-tab="billing">🏥 Hospital Billing &amp; HITL Approval</button>
+            <button class="tabbtn" data-tab="patient">📱 Patient Care &amp; Transparent Billing</button>
+          </div>
+
+          <div id="resultsEmpty" class="glass empty-state">
+            <div class="ee-icon">🧬</div>
+            <h3>No analysis yet</h3>
+            <p>Run the Automedi 360 Dual Engine on the left to extract billing codes and generate the patient care plan.</p>
+          </div>
+
+          <div id="resultsBody" hidden>
+            <!-- TAB 1 -->
+            <div class="tabpanel active" id="tab-billing">
+              <div class="metrics-row">
+                <div class="glass ring-card">
+                  <div class="ring-wrap">
+                    <svg class="ring-svg" viewBox="0 0 130 130">
+                      <defs>
+                        <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                          <stop offset="0%" stop-color="#2fd0d9"/>
+                          <stop offset="100%" stop-color="#8b7cf6"/>
+                        </linearGradient>
+                      </defs>
+                      <circle class="ring-track" cx="65" cy="65" r="55"/>
+                      <circle class="ring-progress" id="ringProgress" cx="65" cy="65" r="55"/>
+                    </svg>
+                    <div class="ring-center">
+                      <span class="ring-pct" id="ringPct">0%</span>
+                    </div>
+                  </div>
+                  <div class="ring-label" id="ringCaption">AI Confidence · HITL Verification Required</div>
+                </div>
+                <div class="glass revenue-card">
+                  <span class="revenue-label">Uncaptured Revenue Identified</span>
+                  <span class="revenue-val" id="revenueVal">₹0</span>
+                  <span class="revenue-sub" id="revenueSub">Across 0 billable entities detected in this note</span>
+                </div>
+              </div>
+
+              <div class="glass panel">
+                <div class="panel-title">NABH / TPA Compliance</div>
+                <div class="alert-box" id="complianceBox"></div>
+              </div>
+
+              <div class="glass panel">
+                <div class="codes-head">
+                  <h3>Extracted ICD-10 &amp; CPT Codes</h3>
+                  <span class="codes-count" id="codesCount">0 codes</span>
+                </div>
+                <div class="code-grid" id="codeGrid"></div>
+              </div>
+              <div class="glass approve-footer">
+                <span>HITL Review Progress</span>
+                <span><strong id="approvedAmt">₹0</strong> approved of <strong id="identifiedAmt">₹0</strong> identified</span>
+              </div>
+            </div>
+
+            <!-- TAB 2 -->
+            <div class="tabpanel" id="tab-patient">
+              <div class="glass panel">
+                <div class="panel-title">Medical Jargon, Translated</div>
+                <div id="jargonList"></div>
+              </div>
+              <div class="glass panel">
+                <div class="panel-title">Your After-Care Protocol</div>
+                <ul class="aftercare-list" id="aftercareList"></ul>
+              </div>
+              <div class="glass panel">
+                <div class="panel-title">Financial Transparency</div>
+                <div class="fin-bar" id="finBar">
+                  <div class="fin-bar-seg covered" id="finBarCovered" style="width:0%"></div>
+                  <div class="fin-bar-seg copay" id="finBarCopay" style="width:0%"></div>
+                </div>
+                <div class="fin-legend">
+                  <span><i style="background:var(--good);"></i>Insurance / TPA approved</span>
+                  <span><i style="background:var(--rose);"></i>Your estimated copay</span>
+                </div>
+                <table class="fin-table">
+                  <tr><td>Total Hospital Charge</td><td id="finTotal">₹0</td></tr>
+                  <tr><td id="finTpaLabel">TPA Approval</td><td id="finApproved">₹0</td></tr>
+                  <tr class="copay"><td>Estimated Out-of-Pocket Copay</td><td id="finCopay">₹0</td></tr>
+                </table>
+                <div class="action-row">
+                  <button class="btn btn-ghost btn-sm" id="btnPdf">📄 View ABDM-Compliant Summary</button>
+                  <button class="btn btn-ghost btn-sm" id="btnWhatsapp">💬 Send Care Plan to Patient WhatsApp</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== REGISTER ===================== -->
+    <section class="page" id="page-register" hidden>
+      <div class="page-head">
+        <div>
+          <h1>Patient Registration</h1>
+          <p>Add a new IPD, OPD or ER patient — they're saved by the API and appear in the Clinical Workspace roster the moment you save.</p>
+        </div>
+      </div>
+
+      <div class="register-grid">
+        <form class="glass panel" id="registerForm" novalidate>
+          <div class="form-section">
+            <div class="form-section-title">Identity</div>
+            <div class="form-grid">
+              <div class="full">
+                <label class="field-label" for="fName">Full Name*</label>
+                <input type="text" id="fName" required placeholder="e.g. Meera Krishnan">
+              </div>
+              <div>
+                <label class="field-label" for="fAge">Age*</label>
+                <input type="number" id="fAge" min="0" max="120" required placeholder="e.g. 42">
+              </div>
+              <div>
+                <label class="field-label" for="fGender">Gender*</label>
+                <select id="fGender" required>
+                  <option value="">Select…</option>
+                  <option>Female</option><option>Male</option><option>Other</option>
+                </select>
+              </div>
+              <div class="full">
+                <label class="field-label" for="fBlood">Blood Group</label>
+                <select id="fBlood">
+                  <option value="Unknown">Unknown</option>
+                  <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                  <option>O+</option><option>O-</option><option>AB+</option><option>AB-</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Admission</div>
+            <div class="segmented" style="margin-bottom:12px;">
+              <label><input type="radio" name="fWard" value="IPD" checked><span>IPD Ward</span></label>
+              <label><input type="radio" name="fWard" value="OPD"><span>OPD</span></label>
+              <label><input type="radio" name="fWard" value="ER"><span>ER / Triage</span></label>
+            </div>
+            <div class="form-grid">
+              <div class="full">
+                <label class="field-label" for="fLocation">Location*</label>
+                <input type="text" id="fLocation" required placeholder="e.g. Room 214 / OPD Token #22 / Triage Bay 1">
+                <div class="hint" id="locationHint">IPD tip: use the format "Room ___" or "ICU Bed ___".</div>
+              </div>
+              <div>
+                <label class="field-label" for="fDept">Department*</label>
+                <select id="fDept" required>
+                  <option value="">Select…</option>
+                  <option>Cardiology</option><option>Neurology</option><option>General Medicine</option>
+                  <option>Orthopedics</option><option>Pediatrics</option><option>Gastroenterology</option>
+                  <option>Pulmonology</option><option>Obstetrics &amp; Gynaecology</option>
+                </select>
+              </div>
+              <div>
+                <label class="field-label" for="fConsultant">Attending Consultant*</label>
+                <input type="text" id="fConsultant" required placeholder="e.g. Dr. S. Nambiar">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Coverage &amp; Contact</div>
+            <div class="form-grid">
+              <div class="full">
+                <label class="field-label" for="fTpa">TPA / Insurance Plan*</label>
+                <select id="fTpa" required>
+                  <option value="">Select…</option>
+                  <option>Ayushman Bharat (PM-JAY)</option>
+                  <option>Star Health TPA</option>
+                  <option>HDFC ERGO</option>
+                  <option>ICICI Lombard Health</option>
+                  <option>CGHS</option>
+                  <option>Out-of-Pocket</option>
+                </select>
+              </div>
+              <div class="full">
+                <label class="field-label" for="fPhone">Phone Number (for WhatsApp care plan)</label>
+                <input type="tel" id="fPhone" placeholder="e.g. +91 98xxxxxx21">
+              </div>
+              <div class="full">
+                <label class="field-label" for="fNote">Initial Clinical Note (optional)</label>
+                <textarea id="fNote" rows="4" placeholder="Doctor can also leave this blank and document later in the Workspace."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button type="submit" class="btn btn-primary" style="flex:1;justify-content:center;">+ Add to Roster</button>
+            <button type="reset" class="btn btn-ghost">Clear</button>
+          </div>
+        </form>
+
+        <div class="glass panel">
+          <div class="panel-title">
+            <span>Live Patient Roster</span>
+            <span id="rosterCount" style="font-family:var(--font-mono);color:var(--text-muted);text-transform:none;font-weight:600;">0 patients</span>
+          </div>
+          <div class="roster-table-wrap">
+            <table class="roster" id="rosterTable">
+              <thead><tr><th>UHID</th><th>Name</th><th>Location</th><th>Department</th><th>TPA / Insurance</th><th></th></tr></thead>
+              <tbody id="rosterTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ANALYTICS ===================== -->
+    <section class="page" id="page-analytics" hidden>
+      <div class="page-head">
+        <div>
+          <h1>Analytics &amp; Audit</h1>
+          <p>Revenue capture across departments, and the full HITL approval trail — all served from the API.</p>
+        </div>
+      </div>
+
+      <div class="stat-strip">
+        <div class="glass stat-tile"><div class="stat-label">Total Patients</div><div class="stat-val" id="anPatients">0</div></div>
+        <div class="glass stat-tile"><div class="stat-label">Revenue Identified</div><div class="stat-val" id="anRevenue">₹0</div></div>
+        <div class="glass stat-tile"><div class="stat-label">Codes Approved (HITL)</div><div class="stat-val" id="anApproved">0</div></div>
+        <div class="glass stat-tile"><div class="stat-label">Compliance Alerts Logged</div><div class="stat-val" id="anAlerts">0</div></div>
+      </div>
+
+      <div class="analytics-grid">
+        <div class="glass panel">
+          <div class="panel-title">Revenue Identified by Department</div>
+          <div id="deptBars"></div>
+        </div>
+        <div class="glass panel">
+          <div class="panel-title">HITL Audit Log</div>
+          <div class="roster-table-wrap" style="max-height:360px;overflow-y:auto;">
+            <table class="audit">
+              <thead><tr><th>Time</th><th>Patient</th><th>Action</th><th>Amount</th><th>Status</th></tr></thead>
+              <tbody id="auditTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="sitefooter">
+    <div class="sitefooter-inner">
+      <span>Automedi 360 — Autonomous Hospital Revenue &amp; Patient OS · Hackathon Prototype</span>
+      <span>ABDM M3 · FHIR R4 · HITL Audit Mode: Active</span>
+    </div>
+  </footer>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <div class="modal" id="modalBody"></div>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

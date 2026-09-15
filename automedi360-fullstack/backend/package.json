@@ -1,0 +1,14 @@
+{
+  "name": "automedi360-backend",
+  "version": "1.0.0",
+  "description": "Automedi 360 API — patient roster, the dual keyword/coding engine, HITL audit log and stats.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
